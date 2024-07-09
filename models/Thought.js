@@ -4,13 +4,14 @@ const reactionSchema = require('./Reaction.js');
 const thoughtSchema = new Schema(
   {
     thoughtText: {
-        text: String,
+        type: String,
         required: true,
+        minLength: 1,
         maxLength: 280,
     },
     createdAt: {
         type: Date,
-        default: Date.now(),
+        default: Date.now,
     },
     username: {
         type: String,
@@ -27,7 +28,7 @@ const thoughtSchema = new Schema(
 );
 
 thoughtSchema.virtual('reactionCount').get(function () {
-    return this.reaction.length;
+    return this.reactions.length;
   });
 
 const Thought = model('thought', thoughtSchema);
